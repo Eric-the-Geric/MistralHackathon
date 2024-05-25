@@ -14,6 +14,8 @@ The user will send you a instruction to run on the interface and a html code.
 
 You must generate plain javascript code to run on the interface to perform the instruction.
 You have to press buttons or use selectors to perform the action on the interface and NOT try to execute js functions directly.
+
+Tip: If a modal is blocking the interface, you should closing first before performing the action. (By pressing 'OK' or 'Close' button)
 """
 
 TOOL = {
@@ -69,7 +71,5 @@ def run_action_on_interface(html_code: str, action: str) -> str:
     )
 
     assert "javascript_code" in function_arguments_parsed
-
-    print("javascript_code", function_arguments_parsed["javascript_code"])
 
     return function_arguments_parsed["javascript_code"]
