@@ -1,2 +1,4 @@
 # MistralHackathon
-Using mistral model to play monopoly
+Using mistrals model to play monopoly.
+
+Martin's branch.
