@@ -1,15 +1,12 @@
 import time
 
 from dotenv import load_dotenv
-
-from shared.actions import Action
-from src.modules.interface.actions_to_prompt import ExtraAction
+from shared.actions import Action, ExtraAction
 from src.modules.interface.retrieve_game_history import retrieve_game_history
 from src.modules.interface.retrieve_player_cash import retrieve_player_cash
 from src.modules.interface.start import execute_action, init_interface
 
 load_dotenv()
-
 
 if __name__ == "__main__":
     driver = init_interface()

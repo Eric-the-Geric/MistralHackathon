@@ -1,6 +1,5 @@
 from selenium.webdriver.remote.webdriver import WebDriver
 
-
 def get_and_remove_display_none_elements(driver: WebDriver) -> str:
     return driver.execute_script(
         """

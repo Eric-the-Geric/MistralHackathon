@@ -1,18 +1,11 @@
-from enum import Enum
+#from enum import Enum
 from typing import Union
-
-from src.shared.actions import Action
-
-
-class ExtraAction(Enum):
-    INITIALIZE = "INITIALIZE"
-    ROLL_DICE = "ROLL_DICE"
-
+from src.shared.actions import Action, ExtraAction
 
 actions_to_prompt: dict[Union[Action, ExtraAction], str] = {
     # Tabs:
     Action.MANAGE: "Go on the 'Manage' tab",
-    Action.BUY: "Got to the 'Buy' tab",
+    Action.BUY: "Go to the 'Buy' tab",
     Action.TRADE: "Go to the 'Trade' tab",
     # Actions:
     Action.ROLL_AGAIN: "Roll the dice again",
@@ -29,4 +22,14 @@ actions_to_prompt: dict[Union[Action, ExtraAction], str] = {
 
 
 def get_action_prompt(action: Union[Action, ExtraAction]) -> str:
+    #print((action))
+    print(f"Action received: {action}")
+    print(f"Type of action: {type(action)}")
+    print(f"All Action members: {list(Action)}")
+    print(f"All ExtraAction members: {list(ExtraAction)}")
     return actions_to_prompt[action]
+
+
+if __name__ == "__main__":
+    action = Action("BUY")
+    print(actions_to_prompt[action])

@@ -20,6 +20,9 @@ class Action(Enum):
     PROPOSE_TRADE = "PROPOSE_TRADE"
     CANCEL_TRADE = "CANCEL_TRADE"
 
+class ExtraAction(Enum):
+    INITIALIZE = "INITIALIZE"
+    ROLL_DICE = "ROLL_DICE"
 
-def str_to_action(action_str: str) -> Action:
-    return Action(action_str)
+#def str_to_action(action_str: str) -> Action:
+#    return Action(action_str)
