@@ -1,30 +1,39 @@
 import os
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.action_chains import ActionChains
 import time
+from selenium import webdriver
 
-# Initialize the Chrome driver
-driver = webdriver.Chrome()
-
-
-# Get the absolute path to the repository's root
-repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
-
-# Construct the absolute path to the index.html file
-monopoly_web_index_path = os.path.join(repo_root, 'monopoly-interface', 'index.html')
-
-# Open the web page
-driver.get("file://"+monopoly_web_index_path)
+from src.modules.interface.interface_agent import run_action_on_interface
+from src.modules.interface.utils import get_cleaned_html
 
 
-# Wait for the page to load completely
-time.sleep(2)
+def start_interface() -> None:
+    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+    monopoly_web_index_path = os.path.join(repo_root, 'monopoly-interface', 'index.html')
+    file_url = f"file://{monopoly_web_index_path}"
 
-driver.execute_script("console.log('Hello from the console!')")
+    driver = webdriver.Chrome()
 
-time.sleep(20)
+    driver.get(file_url)
 
-# TODO
-# Interact with the page
+    driver.implicitly_wait(2)
+
+
+    
+    try:
+        cleaned_html = get_cleaned_html(driver, file_url)
+        print("Got cleaned html", cleaned_html)
+
+        js_code_for_action = run_action_on_interface(html_code=cleaned_html, action="Initialize the game with 2 players")
+
+
+        driver.execute_script(js_code_for_action)
+
+        driver.implicitly_wait(2)
+        time.sleep(20)
+    finally:
+        driver.quit()
+
+
+
+if __name__ == "__main__":
+    start_interface()
