@@ -6,6 +6,7 @@ from selenium import webdriver
 from src.modules.interface.actions_to_prompt import ExtraAction, get_action_prompt
 from src.modules.interface.interface_agent import run_action_on_interface
 from src.modules.interface.retrieve_game_history import retrieve_game_history
+from src.modules.interface.retrieve_player_cash import retrieve_player_cash
 from src.modules.interface.utils import get_cleaned_html
 from src.shared.actions import Action
 
@@ -32,6 +33,7 @@ def start_interface() -> None:
             ExtraAction.ROLL_DICE,
             Action.BUY,
             Action.BUY_PROPERTY,
+            Action.END_TURN,
         ]
 
         for action in actions_to_execute:
@@ -49,7 +51,8 @@ def start_interface() -> None:
 
             time.sleep(2)
 
-        print(retrieve_game_history(driver))
+        print("Player histories:", retrieve_game_history(driver))
+        print("Player cash:", retrieve_player_cash(driver))
 
         time.sleep(200)
     finally:
