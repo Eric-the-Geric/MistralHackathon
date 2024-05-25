@@ -3,7 +3,7 @@ from mistralai.models.chat_completion import ChatMessage
 from dotenv import load_dotenv
 import os
 ROOT_DIR = '.'
-load_dotenv(ROOT_DIR + "/config.env")
+load_dotenv(ROOT_DIR + "/.env")
 api_key = os.environ["MISTRAL_API_KEY"]
 model = "mistral-large-latest"
 client = MistralClient(api_key=api_key)
