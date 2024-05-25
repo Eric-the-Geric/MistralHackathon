@@ -36,8 +36,7 @@ def get_and_remove_display_none_elements(driver: WebDriver) -> str:
     )
 
 
-def get_cleaned_html(driver: WebDriver, url: str) -> str:
-    driver.get(url)
+def get_cleaned_html(driver: WebDriver) -> str:
 
     # Add unique xpath attributes to elements to map between original and cloned elements
     driver.execute_script(

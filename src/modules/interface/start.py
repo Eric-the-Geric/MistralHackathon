@@ -3,10 +3,11 @@ import time
 
 from selenium import webdriver
 
-from src.modules.interface.actions_to_prompt import ExtraAction, extra_actions_to_prompt
+from src.modules.interface.actions_to_prompt import ExtraAction, get_action_prompt
 from src.modules.interface.interface_agent import run_action_on_interface
 from src.modules.interface.retrieve_game_history import retrieve_game_history
 from src.modules.interface.utils import get_cleaned_html
+from src.shared.actions import Action
 
 
 def start_interface() -> None:
@@ -26,17 +27,28 @@ def start_interface() -> None:
     time.sleep(3)
 
     try:
-        cleaned_html = get_cleaned_html(driver, file_url)
-        print("Got cleaned html", cleaned_html)
+        actions_to_execute = [
+            ExtraAction.INITIALIZE,
+            ExtraAction.ROLL_DICE,
+            Action.BUY,
+            Action.BUY_PROPERTY,
+        ]
 
-        js_code_for_action = run_action_on_interface(
-            html_code=cleaned_html,
-            action=extra_actions_to_prompt[ExtraAction.INITIALIZE],
-        )
+        for action in actions_to_execute:
+            print("[Performing action]", action)
+            cleaned_html = get_cleaned_html(driver)
 
-        driver.execute_script(js_code_for_action)
+            js_code_for_action = run_action_on_interface(
+                html_code=cleaned_html,
+                action=get_action_prompt(action),
+            )
 
-        time.sleep(6)
+            print("js_code_for_action>", js_code_for_action)
+
+            driver.execute_script(js_code_for_action)
+
+            time.sleep(2)
+
         print(retrieve_game_history(driver))
 
         time.sleep(200)
