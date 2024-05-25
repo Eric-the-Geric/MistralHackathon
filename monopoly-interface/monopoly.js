@@ -59,7 +59,8 @@ function Game() {
 		if (highestbid > 0) {
 			p.pay(highestbid, 0);
 			sq.owner = highestbidder;
-			addAlert(p.name + " bought " + sq.name + " for $" + highestbid + ".");
+			// Commented out to make ui simpler
+			// addAlert(p.name + " bought " + sq.name + " for $" + highestbid + ".");
 		}
 
 		for (var i = 1; i <= pcount; i++) {
@@ -183,16 +184,19 @@ function Game() {
 					if (bid === -1 || highestbid >= p.money) {
 						p.bidding = false;
 
-						window.alert(p.name + " exited the auction.");
+						// Commented out to make ui simpler
+						// window.alert(p.name + " exited the auction.");
 						continue;
 
 					} else if (bid === 0) {
-						window.alert(p.name + " passed.");
+						// Commented out to make ui simpler
+						// window.alert(p.name + " passed.");
 						continue;
 
 					} else if (bid > 0) {
 						this.auctionBid(bid);
-						window.alert(p.name + " bid $" + bid + ".");
+						// Commented out to make ui simpler
+						// window.alert(p.name + " bid $" + bid + ".");
 						continue;
 					}
 					return;
@@ -1050,7 +1054,8 @@ function Game() {
 			return;
 		}
 
-		addAlert(p.name + " is bankrupt.");
+		// Commented out to make ui simpler
+		// addAlert(p.name + " is bankrupt.");
 
 		if (p.creditor !== 0) {
 			pcredit.money += p.money;
@@ -1267,6 +1272,8 @@ function popup(HTML, action, option) {
 			$("#popupwrap").hide();
 			$("#popupbackground").fadeOut(400);
 		}).on("click", action);
+
+		setTimeout(action, 200);
 
 	}
 
@@ -1789,7 +1796,8 @@ function addamount(amount, cause) {
 
 	p.money += amount;
 
-	addAlert(p.name + " received $" + amount + " from " + cause + ".");
+	// Commented out to make ui simpler
+	// addAlert(p.name + " received $" + amount + " from " + cause + ".");
 }
 
 function subtractamount(amount, cause) {
@@ -1797,12 +1805,14 @@ function subtractamount(amount, cause) {
 
 	p.pay(amount, 0);
 
-	addAlert(p.name + " lost $" + amount + " from " + cause + ".");
+	// Commented out to make ui simpler
+	// addAlert(p.name + " lost $" + amount + " from " + cause + ".");
 }
 
 function gotojail() {
 	var p = player[turn];
-	addAlert(p.name + " was sent directly to jail.");
+	// Commented out to make ui simpler
+	// addAlert(p.name + " was sent directly to jail.");
 	document.getElementById("landed").innerHTML = "You are in jail.";
 
 	p.jail = true;
@@ -1846,7 +1856,8 @@ function payeachplayer(amount, cause) {
 		}
 	}
 
-	addAlert(p.name + " lost $" + total + " from " + cause + ".");
+	// Commented out to make ui simpler
+	// addAlert(p.name + " lost $" + total + " from " + cause + ".");
 }
 
 function collectfromeachplayer(amount, cause) {
@@ -1868,7 +1879,8 @@ function collectfromeachplayer(amount, cause) {
 		}
 	}
 
-	addAlert(p.name + " received $" + total + " from " + cause + ".");
+	// Commented out to make ui simpler
+	// addAlert(p.name + " received $" + total + " from " + cause + ".");
 }
 
 function advance(destination, pass) {
@@ -1880,7 +1892,8 @@ function advance(destination, pass) {
 		} else {
 			p.position = pass;
 			p.money += 200;
-			addAlert(p.name + " collected a $200 salary for passing GO.");
+			// Commented out to make ui simpler
+			// addAlert(p.name + " collected a $200 salary for passing GO.");
 		}
 	}
 	if (p.position < destination) {
@@ -1888,7 +1901,8 @@ function advance(destination, pass) {
 	} else {
 		p.position = destination;
 		p.money += 200;
-		addAlert(p.name + " collected a $200 salary for passing GO.");
+		// Commented out to make ui simpler
+		// addAlert(p.name + " collected a $200 salary for passing GO.");
 	}
 
 	land();
@@ -1904,7 +1918,8 @@ function advanceToNearestUtility() {
 	} else if (p.position >= 28) {
 		p.position = 12;
 		p.money += 200;
-		addAlert(p.name + " collected a $200 salary for passing GO.");
+		// Commented out to make ui simpler
+		// addAlert(p.name + " collected a $200 salary for passing GO.");
 	}
 
 	land(true);
@@ -1922,7 +1937,8 @@ function advanceToNearestRailroad() {
 	} else if (p.position >= 35) {
 		p.position = 5;
 		p.money += 200;
-		addAlert(p.name + " collected a $200 salary for passing GO.");
+		// Commented out to make ui simpler
+		// addAlert(p.name + " collected a $200 salary for passing GO.");
 	}
 
 	land(true);
@@ -1969,7 +1985,8 @@ function payfifty() {
 	p.position = 10;
 	p.pay(50, 0);
 
-	addAlert(p.name + " paid the $50 fine to get out of jail.");
+	// Commented out to make ui simpler
+	// addAlert(p.name + " paid the $50 fine to get out of jail.");
 	updateMoney();
 	updatePosition();
 }
@@ -2434,9 +2451,11 @@ function roll() {
 	doublecount++;
 
 	if (die1 == die2) {
-		addAlert(p.name + " rolled " + (die1 + die2) + " - doubles.");
+		// Commented out to make ui simpler
+		// addAlert(p.name + " rolled " + (die1 + die2) + " - doubles.");
 	} else {
-		addAlert(p.name + " rolled " + (die1 + die2) + ".");
+		// Commented out to make ui simpler
+		// addAlert(p.name + " rolled " + (die1 + die2) + ".");
 	}
 
 	if (die1 == die2 && !p.jail) {
@@ -2450,7 +2469,8 @@ function roll() {
 		} else if (doublecount === 3) {
 			p.jail = true;
 			doublecount = 0;
-			addAlert(p.name + " rolled doubles three times in a row.");
+			// Commented out to make ui simpler
+			// addAlert(p.name + " rolled doubles three times in a row.");
 			updateMoney();
 
 
@@ -2486,7 +2506,8 @@ function roll() {
 			p.position = 10 + die1 + die2;
 			doublecount = 0;
 
-			addAlert(p.name + " rolled doubles to get out of jail.");
+			// Commented out to make ui simpler
+			// addAlert(p.name + " rolled doubles to get out of jail.");
 
 			land();
 		} else {
@@ -2525,7 +2546,8 @@ function roll() {
 		if (p.position >= 40) {
 			p.position -= 40;
 			p.money += 200;
-			addAlert(p.name + " collected a $200 salary for passing GO.");
+			// Commented out to make ui simpler
+			// addAlert(p.name + " collected a $200 salary for passing GO.");
 		}
 
 		land();
@@ -2547,7 +2569,8 @@ function play() {
 
 	document.getElementById("pname").innerHTML = p.name;
 
-	addAlert("It is " + p.name + "'s turn.");
+	// Commented out to make ui simpler
+	// addAlert("It is " + p.name + "'s turn.");
 
 	// Check for bankruptcy.
 	p.pay(0, p.creditor);
