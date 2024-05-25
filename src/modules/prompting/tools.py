@@ -1,5 +1,25 @@
 """Storing the TOOLS variable that our agent will call"""
 
+ACTIONS = [
+{
+        "type": "function",
+        "function": {
+            "name": "Action",
+            "description": "Choose a single action to take. BUY: Use this to buy the property; END_TURN use this to end the turn and not buy the property",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "ACTIONS": {
+                        "type": "string",
+                        "enum": ["BUY", "END_TURN"],
+                        "description": "The action you want to take",
+                        },
+                },
+                "required": ["action"],
+            },
+        },
+    }
+        ]
 STARTER_TOOLS = [
 {
         "type": "function",

@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import os
 import json
 #from src.shared.actions import Action
-from src.modules.prompting.tools import STARTER_TOOLS
+from src.modules.prompting.tools import STARTER_TOOLS, ACTIONS
 
 #print(history)
 def main():
@@ -16,7 +16,7 @@ def main():
         history = f.read()
 
     strategy = strategist(model, api_key)
-    print(strategy)
+    #print(strategy)
     response = agent(strategy + '\n\n' + history, model, api_key)
     tool_call = response.choices[0].message.tool_calls[0]
     function_name = tool_call.function.name
@@ -33,7 +33,7 @@ def agent(current_status, model, api_key):
     chat_response = client.chat(
         model=model,
         messages=messages,
-        tools=STARTER_TOOLS,
+        tools=ACTIONS,
         tool_choice="any"
     )
     #messages.append(chat_response.choices[0].message)
