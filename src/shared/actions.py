@@ -1,4 +1,6 @@
 from enum import Enum
+
+
 class Action(Enum):
     BUY_PROPERTY = "BUY_PROPERTY"
     DO_NOT_BUY_PROPERTY = "DO_NOT_BUY_PROPERTY"
@@ -19,5 +21,5 @@ class Action(Enum):
     CANCEL_TRADE = "CANCEL_TRADE"
 
 
-    
-
+def str_to_action(action_str: str) -> Action:
+    return Action(action_str)

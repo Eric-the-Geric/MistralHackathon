@@ -3,6 +3,7 @@ from selenium.webdriver.remote.webdriver import WebDriver
 
 
 def retrieve_player_cash(driver: WebDriver) -> dict:
+    """Example return value: Player cash: {'Player 1': 1400, 'AI Test 1': 1500}"""
     player_cash = {}
 
     for i in range(1, 4):  # Adjust range if there are more or fewer players
