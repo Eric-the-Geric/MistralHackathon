@@ -5,6 +5,7 @@ from selenium import webdriver
 
 from src.modules.interface.actions_to_prompt import ExtraAction, extra_actions_to_prompt
 from src.modules.interface.interface_agent import run_action_on_interface
+from src.modules.interface.retrieve_game_history import retrieve_game_history
 from src.modules.interface.utils import get_cleaned_html
 
 
@@ -34,6 +35,9 @@ def start_interface() -> None:
         )
 
         driver.execute_script(js_code_for_action)
+
+        time.sleep(6)
+        print(retrieve_game_history(driver))
 
         time.sleep(200)
     finally:

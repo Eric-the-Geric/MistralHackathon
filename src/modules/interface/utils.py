@@ -1,7 +1,7 @@
-from selenium import webdriver
+from selenium.webdriver.remote.webdriver import WebDriver
 
 
-def get_and_remove_display_none_elements(driver: webdriver.Chrome) -> str:
+def get_and_remove_display_none_elements(driver: WebDriver) -> str:
     return driver.execute_script(
         """
         var clone = document.body.cloneNode(true);
@@ -36,7 +36,7 @@ def get_and_remove_display_none_elements(driver: webdriver.Chrome) -> str:
     )
 
 
-def get_cleaned_html(driver: webdriver.Chrome, url: str) -> str:
+def get_cleaned_html(driver: WebDriver, url: str) -> str:
     driver.get(url)
 
     # Add unique xpath attributes to elements to map between original and cloned elements
