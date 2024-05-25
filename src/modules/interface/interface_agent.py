@@ -1,9 +1,10 @@
-
 import json
 import os
+
+import backoff
+from dotenv import load_dotenv
 from mistralai.client import MistralClient
 from mistralai.models.chat_completion import ChatMessage
-from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -34,8 +35,8 @@ TOOL = {
 }
 
 
-
-def run_action_on_interface(html_code: str, action: str)->str:
+@backoff.on_exception(backoff.expo, Exception, max_tries=3, max_time=60)
+def run_action_on_interface(html_code: str, action: str) -> str:
     api_key = os.environ["MISTRAL_API_KEY"]
     model = "mistral-large-latest"
 
@@ -47,28 +48,28 @@ def run_action_on_interface(html_code: str, action: str)->str:
 
     The user has provided the following HTML code:
     {html_code}
-    """.format(action=action, html_code=html_code)
+    """.format(
+        action=action, html_code=html_code
+    )
 
     chat_response = client.chat(
         model=model,
         messages=[
             ChatMessage(role="system", content=system_prompt),
-            ChatMessage(role="user", content=user_prompt)
+            ChatMessage(role="user", content=user_prompt),
         ],
         tools=[TOOL],
-        tool_choice="any"
+        tool_choice="any",
     )
 
     assert isinstance(chat_response.choices[0].message.tool_calls, list)
 
     function_arguments_parsed = json.loads(
-            chat_response.choices[0].message.tool_calls[0].function.arguments
-        )
-    
+        chat_response.choices[0].message.tool_calls[0].function.arguments
+    )
+
     assert "javascript_code" in function_arguments_parsed
 
     print("javascript_code", function_arguments_parsed["javascript_code"])
 
     return function_arguments_parsed["javascript_code"]
-
-
