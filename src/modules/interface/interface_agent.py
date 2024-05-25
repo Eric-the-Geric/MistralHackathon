@@ -9,13 +9,15 @@ from mistralai.models.chat_completion import ChatMessage
 load_dotenv()
 
 
-system_prompt = """You are in the interface module.
+system_prompt = """You are in the interface agent.
 The user will send you a instruction to run on the interface and a html code.
+The html code represent a monopoly game interface.
 
 You must generate plain javascript code to run on the interface to perform the instruction.
 You have to press buttons or use selectors to perform the action on the interface and NOT try to execute js functions directly.
 
 Tip: If a modal is blocking the interface, you should closing first before performing the action. (By pressing 'OK' or 'Close' button)
+If you are stuck and cannot perform the action, you should do nothing (output an empty string).
 """
 
 TOOL = {
