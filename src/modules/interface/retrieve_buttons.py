@@ -1,5 +1,6 @@
 from selenium.webdriver.remote.webdriver import WebDriver
 
+
 def retrieve_possible_actions(driver: WebDriver) -> str:
     script = """
         function isElementHidden(element) {
@@ -41,6 +42,8 @@ def retrieve_possible_actions(driver: WebDriver) -> str:
                 value: rollDiceButton.value
             });
         }
+
+        // Closing popup
         var popupTextElement = document.getElementById('popuptext');
         console.log(popupTextElement)
         if (popupTextElement) {

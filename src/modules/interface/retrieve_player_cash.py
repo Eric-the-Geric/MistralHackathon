@@ -22,8 +22,7 @@ def retrieve_player_cash(driver: WebDriver) -> dict:
 
             # Convert cash value to an integer
             player_cash[player_name] = int(player_cash_value)
-        except Exception as e:
-            # Handle case where element is not found or other errors
-            print(f"Error processing player {i}: {e}")
+        except Exception:
+            break
 
     return player_cash
