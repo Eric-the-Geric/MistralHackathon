@@ -28,6 +28,12 @@ model_action_to_prompt = {
     "ROLL_DICE": "roll the dice",
     "ROLL_AGAIN": "Roll the dice again",
     "OK": "click the 'OK' button to remove the popup",
+    "GO_TO_MANAGE_TAB": "Click on the 'MANAGE' tab", 
+    #"GO_TO_TRADE_TAB": "Click on the 'Trade' tab", 
+    "GO_TO_BUY_TAB": "Click on the Buy *tab*", 
+    "BID": "Make a bid that is greater than your opponent", 
+    "PASS": "Click on the 'pass' button", 
+    "EXIT_AUCTION": "Click on the 'exit auction' button",
 }
 
 
