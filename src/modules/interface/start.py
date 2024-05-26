@@ -13,7 +13,6 @@ from src.modules.interface.utils import get_cleaned_html
 from src.shared.actions import Action, ExtraAction
 
 
-
 def init_interface() -> WebDriver:
     repo_root = os.path.abspath(
         os.path.join(os.path.dirname(__file__), "..", "..", "..")
@@ -40,9 +39,13 @@ def execute_action(driver: WebDriver, action: Union[Action, ExtraAction]) -> Non
     print("[Performing action]", action)
     cleaned_html = get_cleaned_html(driver)
 
+    action_prompt = get_action_prompt(action)
+
+    print("action_prompt>", action_prompt)
+
     js_code_for_action = run_action_on_interface(
         html_code=cleaned_html,
-        action=get_action_prompt(action),
+        action=action_prompt,
     )
 
     print("js_code_for_action>", js_code_for_action)

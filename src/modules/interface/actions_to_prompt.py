@@ -1,5 +1,6 @@
-#from enum import Enum
+# from enum import Enum
 from typing import Union
+
 from src.shared.actions import Action, ExtraAction
 
 actions_to_prompt: dict[Union[Action, ExtraAction], str] = {
@@ -21,13 +22,15 @@ actions_to_prompt: dict[Union[Action, ExtraAction], str] = {
 }
 
 model_action_to_prompt = {
-        "INITIALIZE":  "Initialize the game for 2 players and start the game. Player 1 has to be human and Player 2 has to be AI (test).",
-        "BUY":  "Buy the property you landed on Buy ($Any)",
-        "END_TURN": "End your turn and not buy the property you landed on",
-        "ROLL_DICE": "roll the dice",
-        "ROLL_AGAIN": "Roll the dice again",
-        "OK": "click the 'OK' button to remove the popup",
-        }
+    "INITIALIZE": "Initialize the game for 2 players and start the game. Player 1 has to be human and Player 2 has to be AI (test).",
+    "BUY": "Buy the property you landed on Buy ($Any)",
+    "END_TURN": "End your turn and not buy the property you landed on",
+    "ROLL_DICE": "roll the dice",
+    "ROLL_AGAIN": "Roll the dice again",
+    "OK": "click the 'OK' button to remove the popup",
+}
+
+
 def get_action_prompt(action: str) -> str:
     return model_action_to_prompt[action]
 
