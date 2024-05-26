@@ -10,3 +10,4 @@ def retrieve_game_history(driver: WebDriver) -> str:
     """
     history_element_content = driver.execute_script(script)
     return history_element_content
+

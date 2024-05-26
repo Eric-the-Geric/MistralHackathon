@@ -5,17 +5,17 @@ ACTIONS = [
         "type": "function",
         "function": {
             "name": "Action",
-            "description": "Choose a single action to take. BUY: Use this to buy the property; END_TURN use this to end the turn and not buy the property",
+            "description": "Choose a single action to take. The docs are as follows [ OK: always choose this option if it is in the available options; INITIALIZE: Use this when prompted to do so; BUY: Use this to buy the property; END_TURN use this to end the turn and not buy the property; ROLL_DICE: When prompted to do so, use this; ROLL_AGAIN: when prompted to do so, do use this.",
             "parameters": {
                 "type": "object",
                 "properties": {
                     "ACTIONS": {
                         "type": "string",
-                        "enum": ["BUY", "END_TURN"],
+                        "enum": ["OK","INITIALIZE", "BUY", "END_TURN", "ROLL_DICE", "ROLL_AGAIN"],
                         "description": "The action you want to take",
                         },
                 },
-                "required": ["action"],
+                "required": ["ACTION"],
             },
         },
     }

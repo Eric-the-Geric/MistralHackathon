@@ -15,19 +15,21 @@ def main():
     with open('./src/modules/prompting/history.txt', 'r') as f:
         history = f.read()
 
-    strategy = strategist(model, api_key)
+    #strategy = strategist(model, api_key)
     #print(strategy)
-    response = agent(strategy + '\n\n' + history, model, api_key)
+    response = agent(history)
+    print(response)
     tool_call = response.choices[0].message.tool_calls[0]
     function_name = tool_call.function.name
     function_params = json.loads(tool_call.function.arguments)
     print("\nfunction_name: ", function_name, "\nfunction_params: ", function_params)
 
-def agent(current_status, model, api_key):
-#    if menu == auction:
+def agent(current_status):
+    model="mistral-large-latest"
+    api_key = os.environ["MISTRAL_API_KEY"]
     client = MistralClient(api_key=api_key)
     messages = [
-            ChatMessage(role="system", content="You are an outstanding monopoly player. Given the a general strategy and the history of the game so far, you need to choose an action that would most likely lead to winning the game."), 
+            ChatMessage(role="system", content="You are an outstanding monopoly player. Given the a general strategy and the history of the game so far, you need to choose an action that would most likely lead to winning the game. however, if you ever see this: {'id': 'popupclose', 'value': 'OK'}, you must choose the action 'OK'"), 
             ChatMessage(role="user", content=current_status)
     ]
     chat_response = client.chat(
@@ -36,9 +38,13 @@ def agent(current_status, model, api_key):
         tools=ACTIONS,
         tool_choice="any"
     )
+    tool_call = chat_response.choices[0].message.tool_calls[0]
+    function_name = tool_call.function.name
+    function_params = json.loads(tool_call.function.arguments)
+    print("\nfunction_name: ", function_name, "\nfunction_params: ", function_params)
     #messages.append(chat_response.choices[0].message)
     #how to see which function it called print(chat_response.choices[0].message.tool_calls[0].function)
-    return chat_response
+    return list(function_params.values())[0]
 
 def strategist(model, api_key):
     client = MistralClient(api_key=api_key)

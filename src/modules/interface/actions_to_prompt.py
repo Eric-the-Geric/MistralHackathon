@@ -20,14 +20,16 @@ actions_to_prompt: dict[Union[Action, ExtraAction], str] = {
     ExtraAction.ROLL_DICE: "Roll the dice",
 }
 
-
-def get_action_prompt(action: Union[Action, ExtraAction]) -> str:
-    #print((action))
-    print(f"Action received: {action}")
-    print(f"Type of action: {type(action)}")
-    print(f"All Action members: {list(Action)}")
-    print(f"All ExtraAction members: {list(ExtraAction)}")
-    return actions_to_prompt[action]
+model_action_to_prompt = {
+        "INITIALIZE":  "Initialize the game for 2 players and start the game. Player 1 has to be human and Player 2 has to be AI (test).",
+        "BUY":  "Buy the property you landed on Buy ($Any)",
+        "END_TURN": "End your turn and not buy the property you landed on",
+        "ROLL_DICE": "roll the dice",
+        "ROLL_AGAIN": "Roll the dice again",
+        "OK": "click the 'OK' button to remove the popup",
+        }
+def get_action_prompt(action: str) -> str:
+    return model_action_to_prompt[action]
 
 
 if __name__ == "__main__":
