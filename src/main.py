@@ -1,7 +1,7 @@
 import time
 
 from dotenv import load_dotenv
-
+import os
 from src.modules.interface.retrieve_game_history import retrieve_game_history
 from src.modules.interface.retrieve_player_cash import retrieve_player_cash
 from src.modules.interface.retrieve_possible_actions_agent import (
@@ -18,7 +18,20 @@ if __name__ == "__main__":
     time.sleep(1)
 
     try:
-        history = ""
+
+        # Select a strategy
+       # '''Strategies available:
+       # - default_strategy
+       # - main_strategy
+       # - short_term_strategy
+       # - long_term_strategy
+       # - no_buy_strategy
+       # - Trump_strategy
+       # '''
+        strategy_name = "Trump_strategy"
+        strategy_path = os.path.join("./src/modules/prompting/strategies", f"{strategy_name}.txt")
+        with open(strategy_path, "r") as f:
+                strategy = f.read()
 
         initial_prompt = "initialize the game"
         first_roll = "roll the dice"
@@ -32,7 +45,9 @@ if __name__ == "__main__":
             # buttons_available = str(retrieve_possible_actions(driver))
             # print(buttons_available)
             history = (
-                retrieve_game_history(driver)
+                "You are always player 1"
+                + strategy 
+                + retrieve_game_history(driver)
                 + "\n\n"
                 + f"your bank balance: [{retrieve_player_cash(driver)}] and the options available to you are: {possible_actions}."
             )
