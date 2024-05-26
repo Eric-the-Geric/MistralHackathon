@@ -1,11 +1,24 @@
 """Storing the TOOLS variable that our agent will call"""
 
+                 #GO_TO_TRADE_TAB: If you want to trade money or a property for something the oponent has
 ACTIONS = [
     {
         "type": "function",
         "function": {
             "name": "Action",
-            "description": "Choose a single action to take. The docs are as follows [ OK: always choose this option if it is in the available options; INITIALIZE: Use this when prompted to do so; BUY: Use this to buy the property; END_TURN use this to end the turn and not buy the property; ROLL_DICE: When prompted to do so, use this; ROLL_AGAIN: when prompted to do so, do use this.",
+            "description": """Choose a single action to take. The docs are as follows:
+             [[  OK: always choose this option if it is in the available options
+                 INITIALIZE: Use this when prompted to do so
+                 BUY: Use this to buy the property
+                 END_TURN use this to end the turn and not buy the property 
+                 ROLL_DICE: When prompted to do so, use this
+                 ROLL_AGAIN: when prompted to do so, do use this
+                 BID: during the auction phase, you can bid on a property if you have available funds. You need to outbid your opponent to win the property
+                 GO_TO_BUY_TAB: If you are in a different tab and want to go back to the main game to continue rolling, or buy a property you landed on
+                 GO_TO_MANAGE_TAB: if you want to see your properties and what cards you currently have. Useful if you are in jail or want to think about trading
+                 PASS: Use this to not make a bid and forego the property to your oponent
+                 EXIT_AUCTION: Use this to leave the auction so you can take other actions if you know you don't want the property
+               ]].""",
             "parameters": {
                 "type": "object",
                 "properties": {
@@ -18,6 +31,13 @@ ACTIONS = [
                             "END_TURN",
                             "ROLL_DICE",
                             "ROLL_AGAIN",
+                            "GO_TO_MANAGE_TAB", 
+                            #"GO_TO_TRADE_TAB", 
+                            "GO_TO_BUY_TAB", 
+                            "BID", 
+                            "PASS", 
+                            "EXIT_AUCTION",
+                             
                         ],
                         "description": "The action you want to take",
                     },
